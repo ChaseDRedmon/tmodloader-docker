@@ -1,7 +1,7 @@
-FROM frolvlad/alpine-glibc:alpine-3.10 as build
+FROM frolvlad/alpine-glibc:alpine-3.14 as build
 
-ARG TMOD_VERSION=0.11.7.8
-ARG TERRARIA_VERSION=1353
+ARG TMOD_VERSION=0.11.8.4
+ARG TERRARIA_VERSION=1423
 
 RUN apk update &&\
     apk add --no-cache --virtual build curl unzip &&\
@@ -22,7 +22,7 @@ RUN curl -SL "https://github.com/tModLoader/tModLoader/releases/download/v${TMOD
     rm -r lib tModLoader.bin.x86 tModLoaderServer.bin.x86 &&\
     chmod u+x tModLoaderServer*
 
-FROM frolvlad/alpine-glibc:alpine-3.10
+FROM frolvlad/alpine-glibc:alpine-3.14
 
 WORKDIR /terraria-server
 COPY --from=build /terraria-server ./
